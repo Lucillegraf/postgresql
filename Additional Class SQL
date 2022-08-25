@@ -1,0 +1,73 @@
+LinkedIn ka Joko : https://www.linkedin.com/in/joko-eliyanto-23a1b6143 
+--1. Menggunakan tabel employees, tampilkan 10 Data Nama Pertama Karyawan, Departemen, dan Gajinya Pada Tahun 2022
+
+SELECT first_name, department, salary_2022 
+FROM employees
+LIMIT 10;
+
+--2. Menggunakan tabel sales tampilkan data nama produk yang tidak tersedia di toko 9,6 dan 8 dan harganya di bawah 9000
+SELECT product_name, store_city_id, price_per_kg 
+FROM sales
+WHERE store_city_id NOT IN (6,8,9) 
+AND price_per_kg < 9000;
+
+--3. Menggunakan tabel employees tampilkan alamat email karyawan departemen Data Analyst atau karyawan senior (bekerja sejak 2018)
+SELECT email, department, hire_date 
+FROM employees
+WHERE department = 'Data Analyst'
+OR hire_date <= '2018-01-01' ; 
+
+--4. Tampilkan data karyawan dengan rentang pendapatan 4000 - 6000 pada tahun 2020
+SELECT *
+FROM employees
+WHERE salary_2020 BETWEEN 4000 AND 6000;
+
+--5. Tampilkan data karyawan dengan rentang pendapatan 4000 - 6000 pada tahun 2020 dan direkrut pada tahun 2018
+SELECT *
+FROM employees
+WHERE salary_2020 >= 4000
+AND salary_2020 <= 6000
+AND hire_date >= '2018-01-01'
+AND hire_date <= '2018-12-31';
+
+--6. Menggunakan tabel Sales tampilkan data penjualan buah(product_name dan quantity) pada bulan Agustus 2021
+SELECT product_name, quantity
+FROM sales
+WHERE purchase_date > '2021-07-31'
+AND purchase_date <= '2021-08-31';
+
+--7. Tambahkan kolom purchase_date pada task nomor 2 dan urutkan berdasarkan tanggal secara menaik.
+SELECT product_name, quantity, purchase_date 
+FROM sales
+WHERE purchase_date > '2021-07-31'
+AND purchase_date <= '2021-08-31'
+ORDER BY purchase_date ASC
+;
+
+--8 Menggunakan tabel employees, carilah data lengkap pegawai dengan inisial NN
+SELECT *
+FROM employees
+WHERE first_name LIKE 'N%'
+AND last_name LIKE 'N%';
+
+--9 Carilah karyawan paling senior dengan inisial nama depan R
+SELECT *
+FROM employees
+WHERE first_name LIKE 'R%'
+ORDER BY hire_date ASC;
+
+--10 Carilah departement dengan catatan gaji karyawan terendah pada tahun 2020
+SELECT department, salary_2020
+FROM employees
+ORDER BY salary_2020 ASC
+LIMIT 1;
+
+--11 Tentukan jumlah jenis buah yang ada di tabel sales
+SELECT DISTINCT(product_name)
+FROM sales;
+
+--12 Tentukan jumlah jenis buah yang ada di tabel sales, urutkan berdasarkan abjad
+SELECT DISTINCT(product_name) AS nama_buah
+FROM sales
+ORDER BY product_name ASC;
+
